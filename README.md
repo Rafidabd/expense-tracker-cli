@@ -1,32 +1,31 @@
 # Expense Tracker CLI
 
-I built this while learning Python because I wanted to make something that did more than print an answer and exit. Recording expenses seemed like a good place to start: I needed to save information, check user input, and do something useful with the records afterwards.
+This is a Python program I made to record expenses from the terminal. I wanted to practice saving data to a file, checking inputs and splitting a project into modules.
 
-It runs entirely in the terminal. It's a small project, but it was one of my first attempts at splitting a program into several files instead of putting everything in `main.py`.
+It's fairly simple: you enter an expense, it saves to JSON, and you can view or summarize the records later.
 
-## What it can do
+## Features
 
-- Add an expense with a title, amount, category, and date.
-- Show all saved expenses and remove one by its ID.
-- Calculate total spending and totals for each category.
-- Filter the list by category.
-- Save expenses in a local JSON file, so they stay there after the program closes.
+- Add an expense with a title, amount, category and date.
+- List expenses and delete one by ID.
+- Show total spending.
+- Get a category-wise summary or filter by category.
 
-At the moment, amounts have to be positive whole numbers, dates use `YYYY-MM-DD`, and categories come from [`config/categories.json`](config/categories.json).
+The amount must be a positive whole number. Dates use `YYYY-MM-DD`, and the available categories are in [`config/categories.json`](config/categories.json).
 
-## A look at the program
+## Screenshots
 
-| Menu | Expense list |
+| Menu | Saved expenses |
 | --- | --- |
 | ![Menu](assets/menu.png) | ![Expenses](assets/expenses.png) |
 
-Here's the category summary:
+Category totals:
 
 ![Category summary](assets/analytics.png)
 
-## Run it yourself
+## Run it
 
-You only need Python 3; there are no external packages to install.
+You need Python 3. No additional packages are required.
 
 ```bash
 git clone https://github.com/Rafidabd/expense-tracker-cli.git
@@ -34,9 +33,9 @@ cd expense-tracker-cli
 python main.py
 ```
 
-The program creates `data/expenses.json` the first time it needs it. The file stays inside the project folder and is ignored by Git.
+The program creates `data/expenses.json` when it's needed. That file stays in the project folder and isn't tracked by Git.
 
-An example record looks like this (this is fictional data):
+For example, an expense is stored like this:
 
 ```json
 {
@@ -48,40 +47,38 @@ An example record looks like this (this is fictional data):
 }
 ```
 
-## How I organized it
+That's an example, not a record included with the project.
+
+## Files
 
 ```text
 expense-tracker-cli/
-├── assets/             # Screenshots for this README
-├── config/
-│   └── categories.json
+├── assets/                  # README screenshots
+├── config/categories.json   # Categories
 ├── modules/
-│   ├── analytics.py    # Spending calculations and filters
-│   ├── cli.py          # Terminal menu
+│   ├── analytics.py         # Totals and filtering
+│   ├── cli.py               # Menu
 │   ├── config_loader.py
-│   ├── display.py      # Output formatting
-│   ├── expense_manager.py
-│   └── storage.py      # JSON files and expense IDs
-├── tests/
-│   └── test_storage.py
+│   ├── display.py           # Terminal output
+│   ├── expense_manager.py   # Add/delete expenses
+│   └── storage.py           # JSON storage and IDs
+├── tests/test_storage.py
 ├── main.py
 └── README.md
 ```
 
-One useful lesson from this project was that deciding where to put the files matters. I initially tied the JSON path to the folder I was running Python from. When I moved the project into its own repository, I fixed that so the data location is based on the project's files instead.
+One fix I made after moving this into its own repository was changing the data path. Originally it depended on where I opened the terminal. Now it uses the project folder.
 
 ## Tests
-
-From the project folder:
 
 ```bash
 python -m unittest discover -s tests -v
 ```
 
-There are three small tests covering an empty store, adding and deleting an expense, and rejecting an invalid amount. The tests use temporary files and don't touch your expenses. They don't cover every menu option yet.
+There are three tests so far: creating an empty store, adding and deleting an expense, and rejecting an invalid amount. They use temporary files, so they won't change your expenses.
 
-## What I'd improve
+## Things I could improve
 
-This is a learning project, not personal-finance software. It has no accounts, database, or synchronization between devices. I'd also like to make expense ID generation more robust and add more tests for invalid inputs.
+This isn't a full budgeting app. It uses local JSON, doesn't sync between devices and only accepts whole-number amounts. I'd like to improve how IDs are generated and test more invalid inputs.
 
-I originally built it inside [my Python practice repository](https://github.com/Rafidabd/python-phase-1/tree/main/day13_Mini_Projects/expense-tracker-cli). I later moved it here while keeping its project-specific commit history, so the earlier stages are still visible.
+I first wrote it in [my Python practice repository](https://github.com/Rafidabd/python-phase-1/tree/main/day13_Mini_Projects/expense-tracker-cli). Its earlier commits are preserved here.
