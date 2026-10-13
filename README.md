@@ -26,20 +26,20 @@ I built this project to move beyond single-file exercises. The expense tracker g
 
 Requires **Python 3**. No third-party packages are needed.
 
-Clone the parent repository:
+Clone this standalone repository:
 
 ```bash
-git clone https://github.com/Rafidabd/python-phase-1.git
-cd python-phase-1
+git clone https://github.com/Rafidabd/expense-tracker-cli.git
+cd expense-tracker-cli
 ```
 
-Run the tracker **from the repository root**:
+Run the application:
 
 ```bash
-python day13_Mini_Projects/expense-tracker-cli/main.py
+python main.py
 ```
 
-**Important:** The current implementation uses a path relative to the repository root for expense storage. Running `python main.py` after entering the project folder is **not** the documented startup method.
+The JSON data file is stored in the project's own `data/` directory. Its location is resolved from the source code, so starting the application from a different working directory does not redirect your data.
 
 ## Using the tracker
 
@@ -77,7 +77,7 @@ expense-tracker-cli/
 │   ├── cli.py            # Interactive terminal menu
 │   ├── config_loader.py  # Category configuration
 │   ├── display.py        # Formatted terminal output
-│   ├── expense_manager.py# Adding, reading, deleting expenses
+│   ├── expense_manager.py  # Adding, reading, deleting expenses
 │   └── storage.py        # JSON read/write and ID generation
 ├── main.py
 └── README.md
@@ -91,6 +91,18 @@ This was an opportunity to practice modular design, JSON file handling, input va
 
 ### Current scope and limitations
 
-This is an educational, single-user CLI—not a bank integration or a production finance tool. It uses local JSON rather than a database, accepts whole-number amounts only, and depends on being launched from the parent repository root because of its current storage path.
+This is an educational, single-user CLI—not a bank integration or a production finance tool. It uses local JSON rather than a database and accepts whole-number amounts only.
 
-A future improvement would be to resolve storage relative to the project's directory so it can be run from any working directory.
+## Running tests
+
+From the repository directory, use Python's standard-library test runner:
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+These focused tests use temporary JSON files rather than modifying your actual expenses.
+
+## Project history
+
+This project originally developed inside [my Python learning repository](https://github.com/Rafidabd/python-phase-1/tree/main/day13_Mini_Projects/expense-tracker-cli). It was separated into this standalone repository using Git's subtree history extraction so its project-specific development commits remain available.
