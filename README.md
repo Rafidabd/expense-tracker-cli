@@ -81,4 +81,4 @@ There are three tests so far: creating an empty store, adding and deleting an ex
 
 This isn't a full budgeting app. It uses local JSON, doesn't sync between devices and only accepts whole-number amounts. I'd like to improve how IDs are generated and test more invalid inputs.
 
-I first wrote it in [my Python practice repository](https://github.com/Rafidabd/python-phase-1/tree/main/day13_Mini_Projects/expense-tracker-cli). Its earlier commits are preserved here.
+I first built this while working through Python practice projects. I later moved it into its own repository, keeping the earlier commits here.
